@@ -1,5 +1,6 @@
 <?php 
-    require_once 'config/db_conn.php';
+
+    include_once '../config/db_conn.php';
     class Alumno extends DB {
 
         private $num_control;
@@ -7,13 +8,6 @@
         private $grado;
         private $grupo;
         private $foto;
-
-        public function setNumControl($num_control) {
-            $this->num_control = $num_control;
-        }
-        public function getNumControl() {
-            return $this->num_control;
-        }
 
         public function alumnoExiste($num_control){
             $query = $this->connect()->prepare('SELECT * FROM alumnos WHERE num_control = :num_control');

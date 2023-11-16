@@ -1,6 +1,6 @@
 <?php 
 
-    require_once 'config/db_conn.php';
+include_once '../config/db_conn.php';
     class Objeto extends DB {
 
         private $id;
@@ -12,12 +12,6 @@
         private $alumno_num_control;
         private $estados_estado;
 
-        public function setId($id) {
-            $this->id = $id;
-        }
-        public function getId() {
-            return $this->id;
-        }
 
         public function altaObjeto($descripcion, $lugar, $alumno_num_control, $estados_estado){
             $query = $this->connect()->prepare('INSERT INTO objetos (descripcion, lugar, fecha_reporte, fecha_update, alumno_num_control, estados_estado) VALUES (, :descripcion, :lugar :alumno_num_control, :estados_estado)');

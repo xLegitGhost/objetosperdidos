@@ -11,10 +11,11 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `objeto` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255),
   `descripcion` varchar(255),
   `lugar` varchar(255),
-  `fecha_reporte` timestamp DEFAULT (now()),
-  `fecha_update` timestamp DEFAULT null,
+  `fecha_reporte` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `fecha_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `alumno_num_control` varchar(30),
   `estados_estado` varchar(50)
 );
