@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mostrar objetos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
     <style>
 
   .barra-busqueda{
@@ -18,12 +19,19 @@
     gap: 2em;
   }
 
+  .btn {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+
     </style>
 </head>
 <body>
     <?php 
     ?>
-
+    <a href="index.html">
+    <img src="assets/logo.png" class="logo" height="120"/>
+    </a>
     <div class="container">
         
         <br>
@@ -45,12 +53,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Titulo</th>
-                            <th>Editorial</th>
-                            <th>ISBN</th>
-                            <th>N. Pags</th>
-                            <th>Autores</th>
-                            <th>Clasificacion</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Lugar</th>
+                            <th>Fecha de reporte</th>
+                            <th>Alumno</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
