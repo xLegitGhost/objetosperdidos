@@ -44,14 +44,27 @@
                                 <input class="form-control barra-busqueda" id="myInput" name= "busqueda" type="text" placeholder="Buscar objeto por nombre">
                             </div>
                             <div class="col-4">
-                            <input type="submit" value="Buscar" class="btn btn-success" name="search" onsubmit="">
+                            <input type="submit" value="Todos" class="btn btn-success" name="search" onsubmit="">
+                            <input type="submit" value="Perdido" class="btn btn-danger" name="sperdido">
+                            <input type="submit" value="Encontrado" class="btn btn-warning" name="sencontrado">
+                            <input type="submit" value="Recogido" class="btn btn-secondary" name="sRecogido">
                             </div>
                         </form>
                         <?php 
                         if(isset($_POST['search'])){
                             $busqueda = $_POST['busqueda'];
-                            echo $busqueda;
                         }
+                        if(isset($_POST['sperdido'])){
+                            $filtro = $_POST['sperdido'];
+                        }
+                        if(isset($_POST['sencontrado'])){
+                            $filtro = $_POST['sencontrado'];
+                        }
+                        if(isset($_POST['sRecogido'])){
+                            $filtro = $_POST['sRecogido'];
+                        }
+
+                        
                         ?>
                     </div>
                 </div>
@@ -79,6 +92,10 @@
                                             $resultado = $registros->getRegistro($busqueda);
                                         }else{
                                             $resultado = $registros->getRegistros();
+                                        }
+
+                                        if (isset($filtro)){
+                                            $resultado = $registros->getRegistroEstado($filtro);
                                         }
                                         foreach ($resultado as $fila) { ?>
                                         <tr>
