@@ -47,6 +47,12 @@
                             <input type="submit" value="Buscar" class="btn btn-success" name="search" onsubmit="">
                             </div>
                         </form>
+                        <?php 
+                        if(isset($_POST['search'])){
+                            $busqueda = $_POST['busqueda'];
+                            echo $busqueda;
+                        }
+                        ?>
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -58,26 +64,40 @@
                             <th>Lugar</th>
                             <th>Fecha de reporte</th>
                             <th>Alumno</th>
+                            <th>Foto</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>
-                                        <a href="">
-                                        <button class="btn btn-primary">Cambiar estado</button>
-                                        </a>
-                                    </td>
-                                </tr>
+                                
+                                    <?php 
+                                        require_once '../controllers/mostrarRegistros.php';
+                                        $registros = new Registros();
+                                        if(isset($busqueda) && $busqueda != null){
+                                            $resultado = $registros->getRegistro($busqueda);
+                                        }else{
+                                            $resultado = $registros->getRegistros();
+                                        }
+                                        foreach ($resultado as $fila) { ?>
+                                        <tr>
+
+                                        <td><?php echo $fila['id'] ?></td>
+                                        <td><?php echo $fila['nombre'] ?></td>
+                                        <td><?php echo $fila['descripcion'] ?></td>
+                                        <td><?php echo $fila['lugar'] ?></td>
+                                        <td><?php echo $fila['fecha_reporte'] ?></td>
+                                        <td><?php echo $fila['nombre_alumno'] ?></td>
+                                        <td><?php echo '<img width="80px" src="data:image/jpeg;base64,' . base64_encode($fila['foto']) . '"/>' ?></td>
+                                        <td><?php echo $fila['estado'] ?></td>
+                                        <td>
+                                            <a href="">
+                                            <button class="btn btn-primary">Cambiar estado</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
                     </tbody>
                 </table>
     </div>
