@@ -42,21 +42,6 @@ include_once '../config/db_conn.php';
             }
         }
 
-        public function updatePerdida($id, $estado, $alumno_nc_encontro){
-            try {
-                $query = $this->connect()->prepare('UPDATE perdidas SET estado = :estado, alumno_nc_encontro = :alumno_nc_encontro WHERE id = :id');
-                $query->bindParam(':id', $id);
-                $query->bindParam(':estado', $estado);
-                $query->bindParam(':alumno_nc_encontro', $alumno_nc_encontro);
-                $query->execute();
-                $_SESSION['message'] = 'El objeto ha sido actualizado al estado de ' . $estado . ' exitosamente.';
-                $_SESSION['message_type'] = 'warning';
-                header('Location: ../view/objetos.php');
-            } catch (PDOException $e) {
-                echo "Hubo un problema al actualizar el estado/perdida: " . $e->getMessage() . "\n";
-            }
-        }
-
         public function getPerdida($id){
                 $query = $this->connect()->prepare('SELECT * FROM perdidas WHERE id = :id');
                 $query->execute(['id' => $id]);
@@ -73,6 +58,23 @@ include_once '../config/db_conn.php';
             $query = $this->connect()->prepare('SELECT perdidas.id, objeto.nombre AS objeto_nombre, objeto.descripcion, objeto.lugar, objeto.fecha_reporte, alumno.nombre AS alumno_nombre, perdidas.estado FROM perdidas INNER JOIN objeto ON perdidas.objeto_id = objeto.id INNER JOIN alumno ON perdidas.alumno_num_control = alumno.num_control');
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function cambiarEstado($id, $estado, $alumno_nc_encontro){
+            try {
+                $query = $this->connect()->prepare('UPDATE perdidas SET estado = :estado, alumno_nc_encontro = :alumno_nc_encontro, fecha_update = NOW() WHERE id = :id');
+                $query->bindParam(':id', $id);
+                $query->bindParam(':estado', $estado);
+                $query->bindParam(':alumno_nc_encontro', $alumno_nc_encontro);
+                $query->execute();
+                $_SESSION['message'] = 'El objeto ha sido actualizado al estado de ' . $estado . ' exitosamente.';
+                $_SESSION['message_type'] = 'warning';
+                header('Location: ../view/objetos.php');
+                return true;
+            } catch (PDOException $e) {
+                echo "Hubo un problema al actualizar el estado/perdida: " . $e->getMessage() . "\n";
+                return false;
+            }
         }
         
 

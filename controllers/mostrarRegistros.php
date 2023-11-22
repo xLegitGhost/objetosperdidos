@@ -30,6 +30,20 @@
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getInfoRegistro($id){
+            $query = $this->connect()->prepare('SELECT perdidas.id, objeto.nombre, objeto.descripcion, objeto.lugar, objeto.fecha_reporte, alumno.nombre AS nombre_alumno, perdidas.estado, alumno.foto, perdidas.alumno_nc_encontro, perdidas.fecha_update FROM perdidas INNER JOIN objeto ON objeto.id = perdidas.objeto_id INNER JOIN alumno ON alumno.num_control = perdidas.alumno_num_control WHERE perdidas.id = :id');
+            $query->bindParam(':id', $id);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function getInfoAlumno($id){
+            $query = $this->connect()->prepare('SELECT num_control, nombre, grado, grupo FROM alumno WHERE num_control = :id');
+            $query->bindParam(':id', $id);
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+
 
 
 

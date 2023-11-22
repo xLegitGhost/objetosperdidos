@@ -6,6 +6,7 @@
     <title>Mostrar objetos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
 
   .barra-busqueda{
@@ -33,7 +34,18 @@
     <img src="assets/logo.png" class="logo" height="120"/>
     </a>
     <div class="container">
-        
+
+        <?php
+            session_start();
+
+
+            if(isset($_SESSION['message'])){?>
+                <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
+                    <?= $_SESSION['message'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php session_unset(); } ?>
+
         <br>
                 <h1>Listado de objetos perdidos</h1>
                 <div class="busqueda">
@@ -47,7 +59,7 @@
                             <input type="submit" value="Todos" class="btn btn-success" name="search" onsubmit="">
                             <input type="submit" value="Perdido" class="btn btn-danger" name="sperdido">
                             <input type="submit" value="Encontrado" class="btn btn-warning" name="sencontrado">
-                            <input type="submit" value="Recogido" class="btn btn-secondary" name="sRecogido">
+                            <input type="submit" value="Recuperado" class="btn btn-secondary" name="sRecogido">
                             </div>
                         </form>
                         <?php 
@@ -106,13 +118,22 @@
                                         <td><?php echo $fila['lugar'] ?></td>
                                         <td><?php echo $fila['fecha_reporte'] ?></td>
                                         <td><?php echo $fila['nombre_alumno'] ?></td>
-                                        <td><?php echo '<img width="80px" src="data:image/jpeg;base64,' . base64_encode($fila['foto']) . '"/>' ?></td>
+                                        <?php 
+                                        if($fila['foto'] != null){
+                                            echo "<td><img src='data:image/png;base64,".base64_encode($fila['foto'])."' width='100' height='100'></td>";
+                                        }else{
+                                            echo "<td>No hay imagen disponible</td>";}
+                                        ?>
                                         <td><?php echo $fila['estado'] ?></td>
-                                        <td>
-                                            <a href="">
-                                            <button class="btn btn-primary">Cambiar estado</button>
+                                        <?php if(!($fila['estado'] == 'Recuperado')){ ?>
+                                            <td>
+                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerdida"><i class="bi bi-pen-fill"></i> Cambiar estado</button>
                                             </a>
                                         </td>
+                                        <?php } else { ?>
+                                            <td> Restringido </td>
+                                        <?php } ?>
                                     </tr>
                                     <?php } ?>
                     </tbody>
