@@ -103,10 +103,6 @@
 
         }
 
-        // Obteniendo info para debug
-        $resultado = $alumno->getAlumno("asd");
-        echo $resultado['nombre'];
-        echo '<img src="data:image/jpeg;base64,' . base64_encode($resultado['foto']) . '"/>';
     
     ?>
 

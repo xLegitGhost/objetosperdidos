@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+    
+    session_start();
+    include_once '../models/Perdidas.php';
+    include_once '../models/Objeto.php';
+    include_once '../models/Alumno.php';
+
+    $perdida = new Perdidas();
+    $objeto = new Objeto();
+    $alumno = new Alumno();
+    
+
+    // Obteniendo info para debug
+        //$resultado = $alumno->getAlumno("asd");
+        //    echo $resultado['nombre'];
+        //    echo '<img src="data:image/jpeg;base64,' . base64_encode($resultado['foto']) . '"/>';
+    
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mostrar objetos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
     <style>
@@ -64,20 +83,34 @@
                     </thead>
 
                     <tbody>
+                        <?php 
+                            
+                            $perdida = new Perdidas();
+
+                            $resultado = $perdida->getPerdidasAlumnoObjeto();
+                            
+
+                            foreach ($resultado as $perdida) { ?>
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
+                                    <td><?php echo $perdida['id'] ?></td>
+                                    <td><?php echo $perdida['objeto_nombre'] ?></td>
+                                    <td><?php echo $perdida['descripcion'] ?></td>
+                                    <td><?php echo $perdida['lugar'] ?></td>
+                                    <td><?php echo $perdida['fecha_reporte'] ?></td>
+                                    <td><?php echo $perdida['alumno_nombre'] ?></td>
+                                    <td><?php echo $perdida['estado'] ?></td>
                                     <td>
-                                        <a href="">
-                                        <button class="btn btn-primary">Cambiar estado</button>
-                                        </a>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerdida" ><i class="bi bi-pencil-square"></i> Cambiar estado</button>
                                     </td>
                                 </tr>
+                                
+                            <?php  } 
+                            
+                            include 'modals/editarPerdida.php'
+
+                            ?>
+
                     </tbody>
                 </table>
     </div>
