@@ -67,7 +67,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" name="registrarObjeto" class="btn btn-success">Registrar alumno</button>
+                                <button type="submit" name="registrarObjeto" class="btn btn-success">Registrar objeto</button>
                             </div>
                         </form>
                     </div>

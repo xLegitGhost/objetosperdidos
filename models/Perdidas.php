@@ -35,7 +35,7 @@ include_once '../config/db_conn.php';
                 $query->execute();
                 $_SESSION['message'] = 'Objeto con el estado de ' . $estado . ' registrado exitosamente.';
                 $_SESSION['message_type'] = 'success';
-                header('Location: ../view/agregarObjeto.php');
+                header('Location: ../view/objetos.php');
 
             } catch (PDOException $e) {
                 echo "Hubo un problema al dar de alta la perdida: " . $e->getMessage() . "\n";

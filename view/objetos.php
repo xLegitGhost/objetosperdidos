@@ -127,12 +127,15 @@
                                         <td><?php echo $fila['estado'] ?></td>
                                         <?php if(!($fila['estado'] == 'Recuperado')){ ?>
                                             <td>
-                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerdida"><i class="bi bi-pen-fill"></i> Cambiar estado</button>
+                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
+                                            <button type="button" class="btn btn-primary"> <i class="bi bi-pen-fill"></i> Cambiar estado</button>
                                             </a>
                                         </td>
                                         <?php } else { ?>
-                                            <td> Restringido </td>
+                                            <td>
+                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
+                                            <button type="button" class="btn btn-secondary"> <i class="bi bi-binoculars-fill"></i> Ver detalles</button>
+                                            </a>
                                         <?php } ?>
                                     </tr>
                                     <?php } ?>

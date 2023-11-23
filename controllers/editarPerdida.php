@@ -17,6 +17,14 @@
 
   }
 
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2em;
+  }
+
   .btn {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
@@ -67,22 +75,45 @@
                 ?>
 
                     <!-- Formulario del modal -->
+                    <?php 
+                    switch ($dato['estado']) {
+                        case 'Encontrado':
+                            $aux2 = "encuentro";
+                            break;
+                        case 'Recuperado':
+                            $aux2 = "recuperacion";
+                            break;
+                        case 'Perdido':
+                            $aux2 = "perdida";
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    ?>
+                    <a href="../view/objetos.php">
+                        <img src="../view/assets/logo.png" class="logo" height="120"/>
+                    </a>
                     <div class="form-container">
                         <form action="" method="POST">
-                        <h1 class="modal-title mb-3" id="editarPerdidaLabel">Editando la perdida</h1>
+                        <?php if(!$_GET['estado'] == "Recuperado"){ ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Editando la perdida </h1> <?php } else { ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Viendo detalles</h1> <?php } ?>
                         <div class="alert alert-warning" role="alert">
+                            <?php 
+                            if(!$_GET['estado'] == 'Recuperado'){?>
                             <h4 class="alert-heading">Importante</h4>
                             <p>Estas editando una perdida de el alumno <strong><?php echo $dato['nombre_alumno'] ?></strong>, debes cambiar su estado <strong><?php echo $dato['estado'] ?></strong> a el caso que corresponda.</p>
                             <p>Si el Alumno que encontró el objeto, o lo recogió no se encuentra en la base de datos de Alumnos, debes registrarlo <a href="../view/agregarObjeto.php">aquí</a></p>
                             <hr>
+                            <?php } ?>
                             <h5>Informacion adicional acerca de la perdida de <strong><?php echo $dato['nombre_alumno'] ?></strong>:</h5>
                             <p class="mb-0">Nombre: <strong><?php echo $dato['nombre'] ?></strong></p>
                             <p class="mb-0">Descripcion: <strong><?php echo $dato['descripcion'] ?></strong></p>
                             <p class="mb-0">Lugar: <strong><?php echo $dato['lugar'] ?></strong></p>
                             <p class="mb-0">Fecha de reporte: <strong><?php echo $dato['fecha_reporte'] ?></strong></p>
                             <p class="mb-0">Estado: <strong><?php echo $dato['estado'] ?></strong></p>
+                            <p class="mb-0">Numero de control: <strong><?php echo $dato['num_control'] ?></strong></p>
                             <hr>
-                            <h5>Informacion sobre los cambios de la perdida:</h5>
+                            <h5>Informacion sobre los cambios de la <?php echo $aux2; ?>:</h5>
                             <?php
                             $alumno_2 = $registros->getInfoAlumno($dato['alumno_nc_encontro']);
 
@@ -105,7 +136,7 @@
                             }
 
                             if(isset($aux1)){?>
-                                <p class="mb-0">Último alumno en <strong><?php echo $aux1 ?></strong> del objeto: <strong><?php echo $alumno_2['nombre'] . ' ' . $alumno_2['grado'] . $alumno_2['grupo']; ?></strong></p>
+                                <p class="mb-0">Último alumno en <strong><?php echo $aux1 ?></strong> el objeto: <strong><?php echo $alumno_2['nombre'] . ' ' . $alumno_2['grado'] . $alumno_2['grupo']; ?></strong></p>
                             <?php }else {
                                 echo "<p class='mb-0'>Último alumno en actualizar el estado del objeto: <strong>Nadie</strong></p>";
                             } ?>
@@ -113,7 +144,10 @@
                             <p class="mb-0">Fecha de actualización: <strong><?php echo $dato['fecha_update'] ?></strong></p>
                         </div>
 
-                            <div class="inputs">
+                            <?php 
+                            if(!$_GET['estado'] == 'Recuperado'){?>
+
+                                <div class="inputs">
                                 <h3 class="text-center">Cambia los datos</h3>
                                 <div class="form-floating mb-2">
                                     <select class="form-select" aria-label="Default select example" name="estado">
@@ -137,7 +171,11 @@
                                     <a href="../view/objetos.php"><button type="button" class="btn btn-danger">Volver</button></a>
                                     <button type="submit" name="cambiarEstado" class="btn btn-success">Guardar cambios</button>
                                 </div>
+                                
+                            <?php } ?>
                         </form>
+                        
+                        
                     </div>    
   </div>
 

@@ -38,3 +38,8 @@ CREATE TABLE `perdidas` (
 
 ALTER TABLE `objeto` ADD FOREIGN KEY (`alumno_num_control`) REFERENCES `alumno` (`num_control`);
 ALTER TABLE `objeto` ADD FOREIGN KEY (`estados_estado`) REFERENCES `estados` (`estado`);
+
+INSERT INTO `estados` (`estado`) VALUES ('Perdido');
+INSERT INTO `estados` (`estado`) VALUES ('Encontrado');
+INSERT INTO `estados` (`estado`) VALUES ('Recuperado');
+INSERT INTO `estados` (`estado`) VALUES ('Sin recoger');
