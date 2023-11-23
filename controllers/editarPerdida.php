@@ -43,8 +43,9 @@
                 <?php 
                     session_start();
 
-                    if(isset($_GET['id'])){
+                    if(isset($_GET['id']) && isset($_GET['estado'])){
                         $id = $_GET['id'];
+                        $gestado = $_GET['estado'];
                         include_once '../controllers/mostrarRegistros.php';
                         include_once '../models/Perdidas.php';
                         $registros = new Registros();
@@ -96,14 +97,21 @@
                     </a>
                     <div class="form-container">
                         <form action="" method="POST">
-                        <?php if(!$_GET['estado'] == "Recuperado"){ ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Editando la perdida </h1> <?php } else { ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Viendo detalles</h1> <?php } ?>
+                        <?php if(!($gestado == "Recuperado")){ ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Editando la perdida </h1> <?php } else { ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Viendo detalles</h1> <?php } ?>
                         <div class="alert alert-warning" role="alert">
                             <?php 
-                            if(!$_GET['estado'] == 'Recuperado'){?>
+                            if(!($gestado == "Recuperado")){?>
                             <h4 class="alert-heading">Importante</h4>
                             <p>Estas editando una perdida de el alumno <strong><?php echo $dato['nombre_alumno'] ?></strong>, debes cambiar su estado <strong><?php echo $dato['estado'] ?></strong> a el caso que corresponda.</p>
                             <p>Si el Alumno que encontró el objeto, o lo recogió no se encuentra en la base de datos de Alumnos, debes registrarlo <a href="../view/agregarObjeto.php">aquí</a></p>
                             <hr>
+                            <?php } else { ?>
+                                <h4 class="alert-heading">Detalles</h4>
+                                <p>Estas viendo los detalles de la perdida de <strong><?php echo $dato['nombre_alumno'] ?></strong>, su estado es <strong><?php echo $dato['estado'] ?></strong>.</p>
+                                <p>Al estar en estado Recuperado, no puedes editar más el Estado. Si deseas realizar una modificación adicional Contacta con <strong>Ghosty Solutions</strong> <i class="bi bi-c-circle"></i></p>
+                                <hr>
+
+
                             <?php } ?>
                             <h5>Informacion adicional acerca de la perdida de <strong><?php echo $dato['nombre_alumno'] ?></strong>:</h5>
                             <p class="mb-0">Nombre: <strong><?php echo $dato['nombre'] ?></strong></p>
@@ -145,7 +153,7 @@
                         </div>
 
                             <?php 
-                            if(!$_GET['estado'] == 'Recuperado'){?>
+                            if(!($gestado == "Recuperado")){?>
 
                                 <div class="inputs">
                                 <h3 class="text-center">Cambia los datos</h3>

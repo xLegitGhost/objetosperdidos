@@ -120,7 +120,7 @@
                                         <td><?php echo $fila['nombre_alumno'] ?></td>
                                         <?php 
                                         if($fila['foto'] != null){
-                                            echo "<td><img src='data:image/png;base64,".base64_encode($fila['foto'])."' width='100' height='100'></td>";
+                                            echo "<td><img src='data:image/png;base64,".base64_encode($fila['foto'])."' width='100px' height='80px' ></td>";
                                         }else{
                                             echo "<td>No hay imagen disponible</td>";}
                                         ?>
