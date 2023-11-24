@@ -6,7 +6,7 @@ CREATE TABLE `alumno` (
   `nombre` varchar(255),
   `grado` integer,
   `grupo` varchar(6),
-  `foto` blob
+  `foto` mediumblob
 );
 
 CREATE TABLE `objeto` (
