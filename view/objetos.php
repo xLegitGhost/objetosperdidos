@@ -109,36 +109,39 @@
                                         if (isset($filtro)){
                                             $resultado = $registros->getRegistroEstado($filtro);
                                         }
-                                        foreach ($resultado as $fila) { ?>
-                                        <tr>
-
-                                        <td><?php echo $fila['id'] ?></td>
-                                        <td><?php echo $fila['nombre'] ?></td>
-                                        <td><?php echo $fila['descripcion'] ?></td>
-                                        <td><?php echo $fila['lugar'] ?></td>
-                                        <td><?php echo $fila['fecha_reporte'] ?></td>
-                                        <td><?php echo $fila['nombre_alumno'] ?></td>
-                                        <?php 
-                                        if($fila['foto'] != null){
-                                            echo "<td><img src='data:image/png;base64,".base64_encode($fila['foto'])."' width='100px' height='80px' ></td>";
-                                        }else{
-                                            echo "<td>No hay imagen disponible</td>";}
-                                        ?>
-                                        <td><?php echo $fila['estado'] ?></td>
-                                        <?php if(!($fila['estado'] == 'Recuperado')){ ?>
-                                            <td>
-                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
-                                            <button type="button" class="btn btn-primary"> <i class="bi bi-pen-fill"></i> Cambiar estado</button>
-                                            </a>
-                                        </td>
-                                        <?php } else { ?>
-                                            <td>
-                                            <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
-                                            <button type="button" class="btn btn-secondary"> <i class="bi bi-binoculars-fill"></i> Ver detalles</button>
-                                            </a>
-                                        <?php } ?>
-                                    </tr>
-                                    <?php } ?>
+                                        
+                                        if($resultado){
+                                            foreach ($resultado as $fila) { ?>
+                                                <tr>
+        
+                                                <td><?php echo $fila['id'] ?></td>
+                                                <td><?php echo $fila['nombre'] ?></td>
+                                                <td><?php echo $fila['descripcion'] ?></td>
+                                                <td><?php echo $fila['lugar'] ?></td>
+                                                <td><?php echo $fila['fecha_reporte'] ?></td>
+                                                <td><?php echo $fila['nombre_alumno'] ?></td>
+                                                <?php 
+                                                if($fila['foto'] != null){
+                                                    echo "<td><img src='data:image/png;base64,".base64_encode($fila['foto'])."' width='100px' height='80px' ></td>";
+                                                }else{
+                                                    echo "<td>No hay imagen disponible</td>";}
+                                                ?>
+                                                <td><?php echo $fila['estado'] ?></td>
+                                                <?php if(!($fila['estado'] == 'Recuperado')){ ?>
+                                                    <td>
+                                                    <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
+                                                    <button type="button" class="btn btn-primary"> <i class="bi bi-pen-fill"></i> Cambiar estado</button>
+                                                    </a>
+                                                </td>
+                                                <?php } else { ?>
+                                                    <td>
+                                                    <a href="../controllers/editarPerdida.php?id=<?php echo $fila['id'] ?>&estado=<?php echo $fila['estado'] ?>">
+                                                    <button type="button" class="btn btn-secondary"> <i class="bi bi-binoculars-fill"></i> Ver detalles</button>
+                                                    </a>
+                                                <?php } ?>
+                                            </tr>
+                                            <?php } ?>
+                                        <?php } else{ echo "<tr><td colspan='9' class='text-center' >No hay resultados para esta busqueda</td></tr>"; } ?>
                     </tbody>
                 </table>
     </div>

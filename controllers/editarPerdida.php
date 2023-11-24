@@ -114,12 +114,25 @@
 
                             <?php } ?>
                             <h5>Informacion adicional acerca de la perdida de <strong><?php echo $dato['nombre_alumno'] ?></strong>:</h5>
-                            <p class="mb-0">Nombre: <strong><?php echo $dato['nombre'] ?></strong></p>
-                            <p class="mb-0">Descripcion: <strong><?php echo $dato['descripcion'] ?></strong></p>
-                            <p class="mb-0">Lugar: <strong><?php echo $dato['lugar'] ?></strong></p>
-                            <p class="mb-0">Fecha de reporte: <strong><?php echo $dato['fecha_reporte'] ?></strong></p>
-                            <p class="mb-0">Estado: <strong><?php echo $dato['estado'] ?></strong></p>
-                            <p class="mb-0">Numero de control: <strong><?php echo $dato['num_control'] ?></strong></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                <p class="mb-0">Nombre: <strong><?php echo $dato['nombre'] ?></strong></p>
+                                <p class="mb-0">Descripcion: <strong><?php echo $dato['descripcion'] ?></strong></p>
+                                <p class="mb-0">Lugar: <strong><?php echo $dato['lugar'] ?></strong></p>
+                                <p class="mb-0">Fecha de reporte: <strong><?php echo $dato['fecha_reporte'] ?></strong></p>
+                                <p class="mb-0">Estado: <strong><?php echo $dato['estado'] ?></strong></p>
+                                <p class="mb-0">Numero de control: <strong><?php echo $dato['num_control'] ?></strong></p>
+                                </div>
+                                <div class="col-md-6">
+                                <p class="mb-0">Foto de <strong><?php echo $dato['nombre_alumno'] ?></strong> <hr></p> 
+                                <?php 
+                                        if($dato['foto'] != null){
+                                            echo "<td><img src='data:image/png;base64,".base64_encode($dato['foto'])."' width='100px' height='80px' ></td>";
+                                        }else{
+                                            echo "<strong><td>No hay imagen disponible</td></strong>";}
+                                        ?>
+                                </div>
+                            </div>
                             <hr>
                             <h5>Informacion sobre los cambios de la <?php echo $aux2; ?>:</h5>
                             <?php
@@ -146,11 +159,16 @@
                             if(isset($aux1)){?>
                                 <p class="mb-0">Último alumno en <strong><?php echo $aux1 ?></strong> el objeto: <strong><?php echo $alumno_2['nombre'] . ' ' . $alumno_2['grado'] . $alumno_2['grupo']; ?></strong></p>
                             <?php }else {
+                                echo "<div class='col-md-6'>";
                                 echo "<p class='mb-0'>Último alumno en actualizar el estado del objeto: <strong>Nadie</strong></p>";
+                                echo "</div>";
                             } ?>
                             
                             <p class="mb-0">Fecha de actualización: <strong><?php echo $dato['fecha_update'] ?></strong></p>
-                        </div>
+                            
+                            </div>
+ 
+
 
                             <?php 
                             if(!($gestado == "Recuperado")){?>

@@ -38,7 +38,7 @@
         }
 
         public function getInfoAlumno($id){
-            $query = $this->connect()->prepare('SELECT num_control, nombre, grado, grupo FROM alumno WHERE num_control = :id');
+            $query = $this->connect()->prepare('SELECT num_control, nombre, grado, grupo, foto FROM alumno WHERE num_control = :id');
             $query->bindParam(':id', $id);
             $query->execute();
             return $query->fetch(PDO::FETCH_ASSOC);
