@@ -108,7 +108,7 @@
                             <?php } else { ?>
                                 <h4 class="alert-heading">Detalles</h4>
                                 <p>Estas viendo los detalles de la perdida de <strong><?php echo $dato['nombre_alumno'] ?></strong>, su estado es <strong><?php echo $dato['estado'] ?></strong>.</p>
-                                <p>Al estar en estado Recuperado, no puedes editar más el Estado. Si deseas realizar una modificación adicional Contacta con <strong>Ghosty Solutions</strong> <i class="bi bi-c-circle"></i></p>
+                                <p>Al estar en estado <strong>Recuperado</strong>, no puedes editar más el Estado. Si deseas realizar una modificación adicional Contacta con <strong>Ghosty Solutions</strong> <i class="bi bi-c-circle"></i></p>
                                 <hr>
 
 

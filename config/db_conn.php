@@ -10,7 +10,7 @@
         public function __construct() {
             $this->host = 'localhost';
             $this->user = 'root';
-            $this->password = '27115518';
+            $this->password = '';
             $this->dbname = 'objetosp';
             $this->charset = 'utf8mb4';
         }

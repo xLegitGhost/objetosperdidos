@@ -69,8 +69,18 @@
                 </div>
         <?php session_unset(); } ?>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumno"><i class="bi bi-person-add"></i> Nuevo alumno</button>
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nuevoObjeto" ><i class="bi bi-person-check"></i> Alumno existente</button>
+            <?php
+                if(isset($_POST['registrarAlumno'])){ ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ¡Muy bien, has registrado un Alumno!
+                    Ahora puedes registrar un objeto perdido.
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nuevoObjeto" ><i class="bi bi-person-check"></i> Registrar objeto</button>
+
+                <?php }else { ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumno"><i class="bi bi-person-add"></i> Nuevo alumno</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nuevoObjeto" ><i class="bi bi-person-check"></i> Alumno existente</button>
+                <?php } ?>
             
 
     </div>
@@ -93,7 +103,8 @@
                 } else {
                     // No se subió la foto
                     $alumno->altaAlumno($num_control, $nombre, $grado, $grupo, null);
-                    echo "No se subió la foto";
+                    $_SESSION['message'] = 'Alumno registrado exitosamente.';
+                    $_SESSION['message_type'] = 'success';
 
                 }
 

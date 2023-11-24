@@ -49,7 +49,6 @@
                 $query->execute();
                 $_SESSION['message'] = 'Alumno registrado exitosamente.';
                 $_SESSION['message_type'] = 'success';
-                header('Location: ../view/agregarObjeto.php');
             } catch (PDOException $e) {
                 echo "Hubo un problema al dar de alta el alumno: " . $e->getMessage() . "\n";
             }
