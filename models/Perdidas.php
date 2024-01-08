@@ -76,6 +76,18 @@ include_once '../config/db_conn.php';
                 return false;
             }
         }
+
+        public function alumnoExiste($alumno_num_control){
+            $query = $this->connect()->prepare('SELECT * FROM alumno WHERE num_control = :alumno_num_control');
+            $query->execute(['alumno_num_control' => $alumno_num_control]);
+            if ($query->rowCount() > 0) {
+                return true;
+            } else {
+                $_SESSION['message'] = 'El alumno que ingresaste no existe, debes dar de alta al alumno primero.';
+                $_SESSION['message_type'] = 'danger';
+                return false;
+            }
+        }
         
 
         

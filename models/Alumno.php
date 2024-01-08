@@ -47,8 +47,15 @@
                 }
                 
                 $query->execute();
-                $_SESSION['message'] = 'Alumno registrado exitosamente.';
-                $_SESSION['message_type'] = 'success';
+
+                if(!(isset($_GET['reportador']))){
+                    $_SESSION['message'] = 'Alumno registrado exitosamente.';
+                    $_SESSION['message_type'] = 'success';
+                }else{
+                    $_SESSION['message'] = 'Alumno registrado, ahora puedes cambiar el estado del objeto.';
+                    $_SESSION['message_type'] = 'success';
+                    header('Location: ../view/objetos.php');
+                }
             } catch (PDOException $e) {
                 echo "Hubo un problema al dar de alta el alumno: " . $e->getMessage() . "\n";
             }

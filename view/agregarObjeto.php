@@ -70,17 +70,22 @@
         <?php session_unset(); } ?>
 
             <?php
-                if(isset($_POST['registrarAlumno'])){ ?>
+                if(!(isset($_GET['reportador']))){
+                    $_GET['reportador'] = false;
+                }
+                if(isset($_POST['registrarAlumno']) && !($_GET['reportador'] == true)){ ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     ¡Muy bien, has registrado un Alumno!
                     Ahora puedes registrar un objeto perdido.
                 </div>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nuevoObjeto" ><i class="bi bi-person-check"></i> Registrar objeto</button>
 
-                <?php }else { ?>
+                <?php }else if ($_GET['reportador'] == true) { ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumno"><i class="bi bi-person-add"></i> Nuevo alumno</button>
+                <?php } else { ?>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumno"><i class="bi bi-person-add"></i> Nuevo alumno</button>
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nuevoObjeto" ><i class="bi bi-person-check"></i> Alumno existente</button>
-                <?php } ?>
+                <?php }  ?>
             
 
     </div>

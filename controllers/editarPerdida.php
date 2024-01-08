@@ -69,8 +69,10 @@
                             $estado = $_POST['estado'];
                             $nc_alumno_encontro = $_POST['alumno_nc_encontro'];
                             $fecha_update = $fecha_actual;
-
-                            $queryChangeState = $perdidas->cambiarEstado($id, $estado, $nc_alumno_encontro);
+                            if($perdidas->alumnoExiste($nc_alumno_encontro)){
+                                $queryChangeState = $perdidas->cambiarEstado($id, $estado, $nc_alumno_encontro);
+                            }
+                            
                         }
                     }
                 ?>
@@ -95,6 +97,13 @@
                     <a href="../view/objetos.php">
                         <img src="../view/assets/logo.png" class="logo" height="120"/>
                     </a>
+                    <?php
+                        if(isset($_SESSION['message'])){?>
+                            <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show text-center" role="alert">
+                                <?= $_SESSION['message'] ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                    <?php session_unset(); } ?>
                     <div class="form-container">
                         <form action="" method="POST">
                         <?php if(!($gestado == "Recuperado")){ ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Editando la perdida </h1> <?php } else { ?> <h1 class="modal-title mb-3" id="editarPerdidaLabel">Viendo detalles</h1> <?php } ?>
@@ -103,7 +112,7 @@
                             if(!($gestado == "Recuperado")){?>
                             <h4 class="alert-heading">Importante</h4>
                             <p>Estas editando una perdida de el alumno <strong><?php echo $dato['nombre_alumno'] ?></strong>, debes cambiar su estado <strong><?php echo $dato['estado'] ?></strong> a el caso que corresponda.</p>
-                            <p>Si el Alumno que encontró el objeto, o lo recogió no se encuentra en la base de datos de Alumnos, debes registrarlo <a href="../view/agregarObjeto.php">aquí</a></p>
+                            <p>Si el Alumno que encontró el objeto, o lo recogió no se encuentra en la base de datos de Alumnos, debes registrarlo <a href="../view/agregarObjeto.php?reportador=true">aquí</a></p>
                             <hr>
                             <?php } else { ?>
                                 <h4 class="alert-heading">Detalles</h4>

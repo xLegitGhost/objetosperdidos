@@ -43,7 +43,7 @@ include_once '../config/db_conn.php';
                 $query->bindParam(':estados_estado', $estados_estado);
         
                 $query->execute();
-        
+                header('Location: ../view/objetos.php');
                 return $this->connect()->lastInsertId();
                 
             } catch (PDOException $e) {
