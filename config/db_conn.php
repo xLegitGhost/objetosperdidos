@@ -8,8 +8,8 @@
         private $conn;
     
         public function __construct() {
-            $this->host = '100.26.48.51';
-            $this->user = 'legitghost';
+            $this->host = 'localhost';
+            $this->user = 'root';
             $this->password = '27115518';
             $this->dbname = 'objetosp';
             $this->charset = 'utf8mb4';
