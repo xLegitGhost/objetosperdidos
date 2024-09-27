@@ -13,4 +13,8 @@ Esto con la finalidad de que aparezca en los registros de cambios de estado y pu
 * Bootstrap - Como framework de CSS decidi darle uso a bootstrap para facilitar la maquetación del sitio web y su minimalismo.
 
 🔧 Instalacion
-* Usar XAMPP instalado en localhost para abrir conexión con MYSQL  
+* Usar XAMPP instalado en localhost para abrir conexión con MYSQL
+
+* Preview de la aplicación
+
+<img src="images/EncontradoStatus.png">
