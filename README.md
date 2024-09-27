@@ -15,6 +15,10 @@ Esto con la finalidad de que aparezca en los registros de cambios de estado y pu
 🔧 Instalacion
 * Usar XAMPP instalado en localhost para abrir conexión con MYSQL
 
-* Preview de la aplicación
+💻 Vista de la aplicación
 
-<img src="images/EncontradoStatus.png">
+![Alta a un alumno](images/altaAlumno.png)
+![Alta a un objeto perdido](images/altaObjeto.png)
+![Lista de objetos con filtros](images/listaObjetos.png)
+![Cambiar el estado de un objeto](images/cambiarEstado.png)
+![Estado de un objeto al encontrarse](images/EncontradoStatus.png)
